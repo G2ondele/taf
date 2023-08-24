@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Résultats de la Vérification de Paiement</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        h1, h2 {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        p {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        strong {
+            color: #007bff;
+        }
+    </style>
+</head>
+<body>
+    <h1>Résultats de la Vérification de Paiement</h1>
+    <h2>Résultats dans WPAY :</h2>
+    {% if result1 %}
+        <p>Numéro de transaction : <strong>{{ result1.clientTransID }}</strong> | Numéro de téléphone : <strong>{{ result1.msisdn }}</strong> | Status : <strong>{{ result1.status }}</strong> | Date : <strong>{{ result1.transaction_date}}</strong></p>
+    {% else %}
+        <p>Le paiement n'a pas abouti sur WPAY</p>
+    {% endif %}
+
+    <h2>Résultats dans E2C :</h2>
+    {% if result2 %}
+        <p>Numéro de transaction : <strong>{{ result2.paiementID }}</strong></p>
+        <p>Date : <strong>{{ result2.createdAt}}</strong></p>
+        <p>Téléphone: <strong>{{ result2.tel }}</strong></p>
+    {% else %}
+        <p>Le paiement n'a pas abouti sur E2C</p>
+    {% endif %}
+</body>
+</html>

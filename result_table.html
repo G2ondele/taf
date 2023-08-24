@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Résultats des Paiements</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        h1, h2 {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .table-container {
+            display: flex;
+            justify-content: space-between;
+            margin: 20px;
+        }
+
+
+        .table-wrapper {
+            width: 48%;
+            display: inline-block;
+            vertical-align: top;
+            margin: 0;
+            padding: 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        strong {
+            color: #007bff;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>Résultats des Paiements</h1>
+
+    <div class="table-container">
+        <div class="table-wrapper">
+            <h2>Résultats dans WPAY :</h2>
+            {% if wpay_payments %}
+            <table>
+                <caption> Paiements dans WPAY </caption>
+                <tr>                    
+                    <th>Téléphone</th>
+                    <th>Date</th>
+                    <th>Numéro de transaction</th>
+                    <th>Paiement ID</th>
+                </tr>
+                {% for wpay_payment in wpay_payments %}
+                <tr>                    
+                    <td><strong>{{ wpay_payment.msisdn }}</strong></td>
+                    <td><strong>{{ wpay_payment.transaction_date }}</strong></td>
+                    <td><strong>{{ wpay_payment.clientTransID }}</strong></td>
+                    <td><strong>{{ wpay_payment.paymentID}}</strong></td>
+                </tr>
+                {% endfor %}
+            </table>
+            {% else %}
+            <p>Aucun paiement dans WPAY</p>
+            {% endif %}
+        </div>
+
+        <div class="table-wrapper">
+            <h2>Résultats dans E2C :</h2>
+            {% if result2 %}
+            <table>
+                <caption> Paiements dans E2C </caption>
+                <tr>
+                    <th>Numéro de transaction</th>
+                    <th>Date</th>
+                    <th>Téléphone</th>
+                </tr>
+                {% for e2c_payment in result2 %}
+                <tr>
+                    <td><strong>{{ e2c_payment.paiementID }}</strong></td>
+                    <td>{{ e2c_payment.createdAt }}</td>
+                    <td>{{ e2c_payment.tel }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+            {% else %}
+            <p>Le paiement n'a pas abouti sur E2C</p>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>

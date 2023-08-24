@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vérification de Paiement</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            background-color: #cccccc;
+        }
+
+        .dashboard {
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-start;
+            margin: 20px;
+            margin-bottom: 6%;
+        }
+
+        .widget {
+            background: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            width: 300px;
+            text-align: center;
+            margin-top: 2%;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        select, input[type="text"], input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+        input[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        a {
+            display: block;
+            text-align: center;
+            color: #333;
+            text-decoration: none;
+        }
+
+        strong {
+            color: #0056b3;
+        }
+        .en_tete{
+            width: 100%;
+            color: whitesmoke;
+            background: #0056b3;
+            height: 20%;
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="en_tete"><h1 >Vérification de Paiement de la E2C</h1></div>
+    
+    <div class="dashboard">
+        <div class="widget">
+            <a href="{{ url_for('paiement_wpay') }}"><p>Nombre de paiements dans WPAY :</p>
+                <strong>{{nbre_wpay}}</strong>
+            </a>
+            
+        </div>
+        <div class="widget">
+            <a href="{{ url_for('paiements_non_correspondants') }}"><p>Non correspondants WPAY & E2C :</p>
+                <strong>{{nbre_wpay-nbre_e2c}}</strong>
+            </a>
+            
+        </div>
+        <div class="widget"> 
+            <a href="{{ url_for('paiements_correspondants') }}"><p>Nombre de paiements dans E2C :</p>
+                <strong>{{nbre_e2c}}</strong>
+            </a>
+            
+        </div>
+    </div>
+    <form method="post">
+        <label for="choix">Choix :</label>
+        <select name="choix" id="choix">
+            <option value="1">Numéro de transaction</option>
+            <option value="2">Numéro de téléphone</option>
+        </select>
+        <label for="a">Saisissez le numéro :</label>
+        <input type="text" name="a" id="a">
+        <input type="submit" value="Vérifier">
+    </form>
+    <br>
+    <br>
+</body>
+</html>
+
+

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Paiements Correspondants</title>
+    <style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+        color: #333;
+    }
+
+    h1 {
+        text-align: center;
+        margin-top: 30px;
+    }
+
+    table {
+        width: 80%;
+        margin: 20px auto;
+        border-collapse: collapse;
+        border: 1px solid #ddd;
+    }
+
+    th, td {
+        padding: 10px;
+        text-align: center;
+        border: 1px solid #ddd;
+    }
+
+    th {
+        background-color: #f2f2f2;
+        font-weight: bold;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    strong {
+            color: #007bff;
+        }
+</style>
+</head>
+<body>
+    <h1>Paiements Correspondants</h1>
+    <table>
+        <caption> Paiements qui sont dans Wpay et dans E2C <br></caption>
+        <tr>
+            <th>Numéro de transaction</th>
+            <th>Date</th>
+            <th>Téléphone</th>
+        </tr>
+        {% for e2c_payment in e2c_payments %}
+        <tr>
+            <td><strong>{{ e2c_payment.paiementID }}</strong></td>
+            <td><strong>{{ e2c_payment.createdAt}}</strong></td>
+            <td><strong>{{ e2c_payment.tel}}</strong></td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
